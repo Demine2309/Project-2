@@ -22,6 +22,10 @@ public class DummyController : MonoBehaviour
 
         SwapDirection();
 
+    }
+
+    private void FixedUpdate()
+    {
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
     }
 
