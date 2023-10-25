@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    [Range(0f, 0.5f)]
-    public float parallaxFactor;
+    [SerializeField] private float parallaxFactor;
 
     public void Move(float delta)
     {

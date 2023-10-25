@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParallaxController : MonoBehaviour
 {
     public ParallaxCamera parallaxCamera;
-    List<Parallax> parallaxLayers = new List<Parallax>();
+    public List<Parallax> parallaxLayers = new List<Parallax>();
 
     void Start()
     {
