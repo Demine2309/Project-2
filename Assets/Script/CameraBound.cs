@@ -2,17 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowObject : MonoBehaviour
+public class CameraBound : MonoBehaviour
 {
-    //public Transform target;
-    //[SerializeField] private Vector3 offSet = new Vector3(0, 2, -10);
-    //public float smoothTime = 0.25f;
-    //Vector3 currentVelocity;
-
-    //private void LateUpdate()
-    //{
-    //    transform.position = Vector3.SmoothDamp(transform.position, target.position + offSet, ref currentVelocity, smoothTime);
-    //}
     public Transform dummy;
     public Camera cam;
 
