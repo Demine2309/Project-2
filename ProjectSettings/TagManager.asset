@@ -7,6 +7,7 @@ TagManager:
   - Boss
   - Dummy
   - Bound
+  - Boss trigger
   layers:
   - Default
   - TransparentFX
