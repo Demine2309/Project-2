@@ -11,6 +11,7 @@ public class BossTrigger : MonoBehaviour
         if (collision.CompareTag("Dummy"))
         {
             ActivateBoss();
+            Destroy(this.gameObject);
         }
     }
 

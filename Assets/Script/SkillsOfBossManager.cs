@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillsScriptableObject : ScriptableObject
+public abstract class SkillsOfBossManager
 {
     
 }
