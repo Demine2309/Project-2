@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpitAttack : SkillsOfBoss
+public class SpitAttack : SkillBaseState
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int LayerIndex)
     {

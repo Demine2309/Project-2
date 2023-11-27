@@ -39,7 +39,12 @@ public class Boss : MonoBehaviour
     {
         if(distanceBToD == 15f && isDead == false)
         {
-            anim.
+            
         }
+    }
+
+    public void ActiveBoss()
+    {
+
     }
 }

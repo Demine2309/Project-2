@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
-    SkillsOfBoss currentSkill;
+    SkillBaseState currentSkill;
 
     JumpAttack jump = new JumpAttack();
     SpitAttack spit = new SpitAttack();

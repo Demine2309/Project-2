@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwipeAttack : SkillsOfBoss
+public class SwipeAttack : SkillBaseState
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int LayerIndex)
     {

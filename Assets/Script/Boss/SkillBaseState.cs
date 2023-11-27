@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
-public abstract class SkillsOfBoss
+public abstract class SkillBaseState
 {
     abstract public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int LayerIndex);
     abstract public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int LayerIndex);
