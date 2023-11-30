@@ -1024,9 +1024,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 683671067}
   dummy: {fileID: 1362547762}
+  player: {fileID: 0}
   health: 100
-  healthBar: {fileID: 0}
   isDead: 0
+  distanceBToD: 0
 --- !u!1 &707441144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,6 +1607,7 @@ GameObject:
   - component: {fileID: 1362547760}
   - component: {fileID: 1362547759}
   - component: {fileID: 1362547758}
+  - component: {fileID: 1362547763}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Dummy
@@ -1765,6 +1767,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1362547763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362547757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6371fb9018946144eb586846d5f20c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1499272112
 GameObject:
   m_ObjectHideFlags: 0

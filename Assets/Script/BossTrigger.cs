@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BossTrigger : MonoBehaviour
 {
-    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,8 +14,9 @@ public class BossTrigger : MonoBehaviour
         }
     }
 
-    void ActivateBoss()
+    private void ActivateBoss()
     {
-        
+        Boss boss = GetComponent<Boss>();   
+
     }
 }

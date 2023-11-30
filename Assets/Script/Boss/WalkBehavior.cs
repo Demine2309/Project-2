@@ -2,19 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpAttack : StateMachineBehaviour
+public class WalkBehavior : StateMachineBehaviour
 {
+    [SerializeField] private float speed = 10f;
 
+    private Transform dummy;
+    private Boss boss;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        dummy = GameObject.FindGameObjectWithTag("Dummy").GetComponent<Transform>();
+        boss = animator.GetComponentInParent<Boss>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        boss.FollowPlayer();
+
+
+        Vector2 target = new Vector2(dummy.position.x, animator.transform.position.y);
+        animator.transform.position = Vector3.MoveTowards(animator.transform.position, target, speed);
 
     }
 
@@ -23,16 +32,4 @@ public class JumpAttack : StateMachineBehaviour
     {
 
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

@@ -21,7 +21,6 @@ public class DummyController : MonoBehaviour
         moveDelta = new Vector2(x, 0f);
 
         SwapDirection();
-
     }
 
     private void FixedUpdate()

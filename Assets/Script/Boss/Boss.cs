@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +9,16 @@ public class Boss : MonoBehaviour
     private Animator anim;
     public Transform boss;
     public Transform dummy;
+    [SerializeField] private Transform player;
 
     public int health;
     //public Slider healthBar;
-    public bool isDead;
+    public bool isDead = true;
     private float timeBtwDamage = 1.5f;
-    private float distanceBToD;
+    public float distanceBToD = 25;
+    private bool isFlip = false;
+    private Vector3 eMoveDelta;
+
 
     private void Start()
     {
@@ -26,25 +31,32 @@ public class Boss : MonoBehaviour
         if (health <= 35)
             anim.SetTrigger("buffState");
 
-        if(health <= 0)
+        if (health <= 0)
             anim.SetTrigger("death");
-        
-        if(timeBtwDamage > 0)
+
+        if (timeBtwDamage > 0)
             timeBtwDamage -= Time.deltaTime;
-        
+
         //healthBar.value = health;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void FollowPlayer()
     {
-        if(distanceBToD == 15f && isDead == false)
+        eMoveDelta = transform.localScale;
+        eMoveDelta.z *= -1f;
+
+        if (transform.position.x > player.position.x && isFlip)
         {
-            
+            transform.localScale = eMoveDelta;
+            transform.Rotate(0f, 180f, 0f);
+            isFlip = false;
         }
-    }
 
-    public void ActiveBoss()
-    {
-
+        else if (transform.position.x < player.position.x && !isFlip)
+        {
+            transform.localScale = eMoveDelta;
+            transform.Rotate(0f, 180f, 0f);
+            isFlip = true;
+        }
     }
 }
