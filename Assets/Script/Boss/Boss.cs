@@ -9,7 +9,6 @@ public class Boss : MonoBehaviour
     private Animator anim;
     public Transform boss;
     public Transform dummy;
-    [SerializeField] private Transform player;
 
     public int health;
     //public Slider healthBar;
@@ -45,14 +44,14 @@ public class Boss : MonoBehaviour
         eMoveDelta = transform.localScale;
         eMoveDelta.z *= -1f;
 
-        if (transform.position.x > player.position.x && isFlip)
+        if (transform.position.x > dummy.position.x && isFlip)
         {
             transform.localScale = eMoveDelta;
             transform.Rotate(0f, 180f, 0f);
             isFlip = false;
         }
 
-        else if (transform.position.x < player.position.x && !isFlip)
+        else if (transform.position.x < dummy.position.x && !isFlip)
         {
             transform.localScale = eMoveDelta;
             transform.Rotate(0f, 180f, 0f);

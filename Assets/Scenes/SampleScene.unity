@@ -1024,7 +1024,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 683671067}
   dummy: {fileID: 1362547762}
-  player: {fileID: 0}
   health: 100
   isDead: 0
   distanceBToD: 0

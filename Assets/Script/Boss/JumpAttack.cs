@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class JumpAttack : StateMachineBehaviour
 {
+    private Boss boss;
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        boss = animator.GetComponentInParent<Boss>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
