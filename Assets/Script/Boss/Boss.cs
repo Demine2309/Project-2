@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -14,27 +14,28 @@ public class Boss : MonoBehaviour
     //public Slider healthBar;
     public bool isDead = true;
     private float timeBtwDamage = 1.5f;
-    public float distanceBToD = 25;
     private bool isFlip = false;
     private Vector3 eMoveDelta;
+    private float distanceBToD;
 
 
     private void Start()
     {
         anim = GetComponent<Animator>();
-        distanceBToD = Vector2.Distance(boss.position, dummy.position);
     }
 
     private void Update()
     {
-        if (health <= 35)
-            anim.SetTrigger("buffState");
+        distanceBToD = Vector2.Distance(boss.transform.position, dummy.position);
 
-        if (health <= 0)
-            anim.SetTrigger("death");
+        //if (health <= 35)
+        //    anim.SetTrigger("buffState");
 
-        if (timeBtwDamage > 0)
-            timeBtwDamage -= Time.deltaTime;
+        //if (health <= 0)
+        //    anim.SetTrigger("death");
+
+        //if (timeBtwDamage > 0)
+        //    timeBtwDamage -= Time.deltaTime;
 
         //healthBar.value = health;
     }
@@ -57,5 +58,14 @@ public class Boss : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
             isFlip = true;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(boss.transform.position, dummy.position);
+
+        Vector3 labelPosition = (boss.transform.position + dummy.position) / 2f;
+        UnityEditor.Handles.Label(labelPosition, "Distance: " + distanceBToD.ToString("F2"));
     }
 }
