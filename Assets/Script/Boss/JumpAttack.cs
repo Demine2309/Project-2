@@ -22,8 +22,6 @@ public class JumpAttack : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         distanceBToD = Vector2.Distance(boss.transform.position, dummy.position);
-
-
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
