@@ -24,7 +24,6 @@ public class Boss : MonoBehaviour
     const string BOSS_IDLE = "Boss_Idle";
     const string BOSS_WALK = "Boss_Walk";
     const string BOSS_JUMP = "Boss_Jump";
-    const string BOSS_LAND = "Boss_Land";
     const string BOSS_SWIPE = "Boss_Swipe";
     const string BOSS_SPIT = "Boss_Spit";
     const string BOSS_BUFF = "Boss_Buff"; 
@@ -39,9 +38,28 @@ public class Boss : MonoBehaviour
     private void Update()
     {
         distanceBToD = Vector2.Distance(boss.transform.position, dummy.position);
+        SwapDirection();
+
+
+        FollowDummy();
     }
 
-    public void FollowPlayer()
+    private void FollowDummy()
+    {
+        // Follow the dummy
+        if (distanceBToD < 18f)
+        {
+            ChangeAnimationState(BOSS_WALK);
+            Vector2 target = new Vector2(dummy.position.x, rb.position.y);
+            rb.transform.position = Vector3.MoveTowards(rb.position, target, speed * Time.deltaTime);
+        }
+        else if (distanceBToD > 18f)
+        {
+            ChangeAnimationState(BOSS_IDLE);
+        }
+    }
+
+    private void SwapDirection()
     {
         eMoveDelta = transform.localScale;
         eMoveDelta.z *= -1f;
@@ -59,19 +77,6 @@ public class Boss : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
             isFlip = true;
         }
-
-        // Follow the dummy
-        Vector2 target = new Vector2(dummy.position.x, rb.position.y);
-        rb.transform.position = Vector3.MoveTowards(rb.position, target, speed * Time.deltaTime);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(boss.transform.position, dummy.position);
-
-        Vector3 labelPosition = (boss.transform.position + dummy.position) / 2f;
-        UnityEditor.Handles.Label(labelPosition, "Distance: " + distanceBToD.ToString("F2"));
     }
 
     private void ChangeAnimationState(string newState)
@@ -84,5 +89,14 @@ public class Boss : MonoBehaviour
 
         // Reassign the current state
         currentState = newState;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(boss.transform.position, dummy.position);
+
+        Vector3 labelPosition = (boss.transform.position + dummy.position) / 2f;
+        UnityEditor.Handles.Label(labelPosition, "Distance: " + distanceBToD.ToString("F2"));
     }
 }
