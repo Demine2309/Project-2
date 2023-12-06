@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class DummyController : MonoBehaviour
 {
+    public static DummyController Instance;
+
     private Rigidbody2D rb;
     private Vector2 moveDelta;
     protected float x = 0f;
+    private long health;
+
 
     [SerializeField] private float speed = 20f;
+
+
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+
+        health = long.MaxValue;
+    }
 
     private void Start()
     {
@@ -38,5 +51,10 @@ public class DummyController : MonoBehaviour
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= Mathf.RoundToInt(damage);
     }
 }
