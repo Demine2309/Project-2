@@ -7,6 +7,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float damage;
 
     protected Rigidbody2D rb;
+    protected SpriteRenderer sr;
+    protected Animator anim;
+
+    protected enum EnemyStates
+    {
+        Boss_Idle,
+        Boss_Walk,
+        Boss_Spit,
+        Boss_Swipe,
+        Boss_Jump,
+        Boss_Land
+    }
 
     protected virtual void Start()
     {
@@ -26,9 +38,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void OnTriggerStay2D(Collider2D collision)
+    protected void OnCollision2D(Collision2D collision)
     {
-        if (collision.CompareTag("Dummy"))
+        if (collision.gameObject.CompareTag("Dummy"))
         {
             Attack();
         }

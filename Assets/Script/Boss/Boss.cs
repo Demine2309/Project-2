@@ -6,6 +6,8 @@ public class Boss : Enemy
 
     [Header("Attack Settings:")]
 
+
+
     public float attackRange;
     public float attackTimer;
 
