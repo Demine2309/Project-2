@@ -20,6 +20,20 @@ public class Enemy : MonoBehaviour
         Boss_Land
     }
 
+    protected EnemyStates currentEnemyState;
+
+    protected virtual EnemyStates GetCurrentEnemyState
+    {
+        get { return currentEnemyState; }
+        set
+        {
+            if(currentEnemyState != value)
+            {
+                currentEnemyState = value;
+            }
+        }
+    }
+
     protected virtual void Start()
     {
         

@@ -6,8 +6,6 @@ public class Boss : Enemy
 
     [Header("Attack Settings:")]
 
-
-
     public float attackRange;
     public float attackTimer;
 
@@ -19,12 +17,25 @@ public class Boss : Enemy
 
     private bool alive;
 
+    [SerializeField] private float walkSpeed;
 
+    private void Awake()
+    {
+        if(Instance!= null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
-
-
-
-
+    protected override void Start()
+    {
+        base.Start();
+        sr = GetComponentInChildren<>();
+    }
 
 
 
