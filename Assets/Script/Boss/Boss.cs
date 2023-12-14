@@ -1,27 +1,35 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Boss : Enemy
 {
     public static Boss Instance;
 
     [Header("Attack Settings:")]
+    public Transform SideAttackTransform; //the middle of the side attack area
+    public Vector2 SideAttackArea; //how large the area of side attack is
 
     public float attackRange;
     public float attackTimer;
 
+    [HideInInspector] public bool attacking;
+    [HideInInspector] public float attackCountdown;
+
+
     [Header("Ground Check Settings:")]
-    [SerializeField] private Transform groundCheckPoint; // Point at which ground check happens
+    [SerializeField] public Transform groundCheckPoint; // Point at which ground check happens
     [SerializeField] private float groundCheckY = 0.2f; // How far down from ground check point is Grounded() checked
     [SerializeField] private float groundCheckX = 0.5f; // How far horizontally from check point to the edge of the dummy is
     [SerializeField] private LayerMask whatIsGround; // Sets the ground layer
 
     private bool alive;
 
-    [SerializeField] private float walkSpeed;
+    [HideInInspector] public bool facingRight;
+    [HideInInspector] public float walkSpeed;
 
     private void Awake()
     {
-        if(Instance!= null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
@@ -37,13 +45,89 @@ public class Boss : Enemy
 
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
-
-        ChangeState(EnemyStates.Boss_Idle);
-        alive = true;
     }
 
+    protected override void Update()
+    {
+        base.Update();
 
+    }
 
+    public void AttackHandler()
+    {
+        if (currentEnemyState == EnemyStates.Boss_Idle)
+        {
+            if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) == 2.5f && Grounded() == true)
+            {
+                StartCoroutine(DoubleSwipeAttack());
+            }
+        }
+    }
+
+    protected override void UpdateEnemyStates()
+    {
+        if (DummyController.Instance != null)
+        {
+            switch (GetCurrentEnemyState)
+            {
+                case EnemyStates.Boss_Idle: break;
+                case EnemyStates.Boss_Walk: break;
+                case EnemyStates.Boss_Spit: break;
+                case EnemyStates.Boss_Swipe: break;
+                case EnemyStates.Boss_Jump: break;
+                case EnemyStates.Boss_Land: break;
+                case EnemyStates.Boss_Buff: break;
+            }
+        }
+    }
+
+    public bool Grounded()
+    {
+        if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround)
+            || Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround)
+            || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void SwapDirection()
+    {
+        if (DummyController.Instance.transform.position.x < transform.position.x && transform.localScale.x > 0)
+        {
+            transform.eulerAngles = new Vector2(transform.eulerAngles.x, 180);
+            facingRight = false;
+        }
+        else
+        {
+            transform.eulerAngles = new Vector2(transform.eulerAngles.x, 0);
+            facingRight = true;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(SideAttackTransform.position, SideAttackArea);
+    }
+
+    IEnumerator DoubleSwipeAttack()
+    {
+        attacking = true;
+        rb.velocity = Vector2.zero;
+
+        anim.SetTrigger("Swipe");
+        yield return new WaitForSeconds(0.3f);
+        anim.ResetTrigger("Swipe");
+
+        anim.SetTrigger("Swipe");
+        yield return new WaitForSeconds(0.5f);
+        anim.ResetTrigger("Swipe");
+    }
 
 
 

@@ -17,7 +17,8 @@ public class Enemy : MonoBehaviour
         Boss_Spit,
         Boss_Swipe,
         Boss_Jump,
-        Boss_Land
+        Boss_Land,
+        Boss_Buff
     }
 
     protected EnemyStates currentEnemyState;

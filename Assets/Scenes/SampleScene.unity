@@ -778,9 +778,7 @@ Transform:
   m_LocalPosition: {x: 12.64, y: -0.89, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1801202458}
-  - {fileID: 2005519834}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -889,10 +887,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149e8fc3a6dbeb0469bbe223386fa394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 683671067}
-  dummy: {fileID: 1362547762}
   health: 100
   speed: 2
+  damage: 25
+  SideAttackTransform: {fileID: 683671067}
+  SideAttackArea: {x: 0, y: 0}
+  attackRange: 0
+  attackTimer: 0
+  attacking: 0
+  attackCountdown: 0
+  groundCheckPoint: {fileID: 0}
+  groundCheckY: 0.2
+  groundCheckX: 0.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  facingRight: 0
+  walkSpeed: 0
 --- !u!1 &707441144
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,7 +2052,7 @@ GameObject:
   - component: {fileID: 1747020426}
   - component: {fileID: 1747020428}
   - component: {fileID: 1747020427}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 4- Ground (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2266,37 +2277,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1801202457
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1801202458}
-  m_Layer: 0
-  m_Name: GroundCheckUp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1801202458
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801202457}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 683671067}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1975736847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,34 +2383,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2005519833
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2005519834}
-  m_Layer: 0
-  m_Name: GroundCheckDown
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2005519834
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005519833}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 683671067}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
