@@ -30,13 +30,25 @@ public class Enemy : MonoBehaviour
             if(currentEnemyState != value)
             {
                 currentEnemyState = value;
+
+                ChangeCurrentAnimation();
             }
         }
     }
 
+    protected virtual void UpdateEnemyStates() { }
+    protected virtual void ChangeCurrentAnimation() { }
+
+    protected void ChangeState(EnemyStates newState)
+    {
+        GetCurrentEnemyState = newState;
+    }
+
     protected virtual void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     protected virtual void Awake()
@@ -63,5 +75,10 @@ public class Enemy : MonoBehaviour
     protected virtual void Attack()
     {
         DummyController.Instance.TakeDamage(damage);
+    }
+
+    protected virtual void Death(float destroyTime)
+    {
+        Destroy(gameObject, destroyTime);
     }
 }

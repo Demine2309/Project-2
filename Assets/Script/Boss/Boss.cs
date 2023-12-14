@@ -34,7 +34,12 @@ public class Boss : Enemy
     protected override void Start()
     {
         base.Start();
-        sr = GetComponentInChildren<>();
+
+        sr = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
+
+        ChangeState(EnemyStates.Boss_Idle);
+        alive = true;
     }
 
 
