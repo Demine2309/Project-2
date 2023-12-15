@@ -59,7 +59,7 @@ public class Boss : Enemy
         {
             if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) == 2.5f && Grounded() == true)
             {
-                StartCoroutine(DoubleSwipeAttack());
+                StartCoroutine(TripleSwipeAttack());
             }
         }
     }
@@ -115,7 +115,7 @@ public class Boss : Enemy
         Gizmos.DrawWireCube(SideAttackTransform.position, SideAttackArea);
     }
 
-    IEnumerator DoubleSwipeAttack()
+    IEnumerator TripleSwipeAttack()
     {
         attacking = true;
         rb.velocity = Vector2.zero;
@@ -127,6 +127,24 @@ public class Boss : Enemy
         anim.SetTrigger("Swipe");
         yield return new WaitForSeconds(0.5f);
         anim.ResetTrigger("Swipe");
+
+        anim.SetTrigger("Swipe");
+        yield return new WaitForSeconds(0.2f);
+        anim.ResetTrigger("Swipe");
+    }
+
+    IEnumerator DoubleSpitAttack()
+    {
+        attacking = true;
+        rb.velocity = Vector2.zero;
+
+        anim.SetTrigger("Spit");
+        yield return new WaitForSeconds(0.3f);
+        anim.ResetTrigger("Spit");
+
+        anim.SetTrigger("Spit");
+        yield return new WaitForSeconds(0.5f);
+        anim.ResetTrigger("Spit");
     }
 
 
