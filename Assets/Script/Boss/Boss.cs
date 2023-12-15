@@ -95,7 +95,7 @@ public class Boss : Enemy
         }
     }
 
-    private void SwapDirection()
+    public void SwapDirection()
     {
         if (DummyController.Instance.transform.position.x < transform.position.x && transform.localScale.x > 0)
         {
