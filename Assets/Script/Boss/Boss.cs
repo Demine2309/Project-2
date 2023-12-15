@@ -51,6 +51,10 @@ public class Boss : Enemy
     {
         base.Update();
 
+        if(!attacking)
+        {
+            attackCountdown -= Time.deltaTime;
+        }
     }
 
     public void AttackHandler()

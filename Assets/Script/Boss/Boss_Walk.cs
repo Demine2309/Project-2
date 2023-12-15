@@ -40,9 +40,9 @@ public class Boss_Walk : StateMachineBehaviour
             rb.velocity = new Vector2(rb.velocity.x, -25); // if boss is not grounded, fall to ground
         }
 
-        if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) >= Boss.Instance.attackRange)
+        if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= Boss.Instance.attackRange)
         {
-            animator.SetBool("Walk", true);
+            animator.SetBool("Walk", false);
         }
         else
         {
