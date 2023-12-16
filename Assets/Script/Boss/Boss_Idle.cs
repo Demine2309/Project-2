@@ -26,9 +26,9 @@ public class Boss_Idle : StateMachineBehaviour
 
     private void RunToPlayer(Animator animator)
     {
-        if(Vector2.Distance(Boss.Instance.transform.position, rb.position) >= Boss.Instance.attackRange)
+        if(Vector2.Distance(DummyController.Instance.transform.position, rb.position) >= Boss.Instance.attackRange)
         {
-            animator.SetBool("Run", true);
+            animator.SetBool("Walk", true);
         }
         else
         {

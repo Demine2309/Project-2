@@ -45,6 +45,9 @@ public class Boss : Enemy
 
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
+        alive = true;
+
+        ChangeState(EnemyStates.Boss_Stage1);
     }
 
     protected override void Update()
@@ -55,18 +58,10 @@ public class Boss : Enemy
         {
             attackCountdown -= Time.deltaTime;
         }
+
+        Debug.Log(Grounded());
     }
 
-    public void AttackHandler()
-    {
-        if (currentEnemyState == EnemyStates.Boss_Idle)
-        {
-            if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) == 2.5f && Grounded() == true)
-            {
-                StartCoroutine(TripleSwipeAttack());
-            }
-        }
-    }
 
     protected override void UpdateEnemyStates()
     {
@@ -74,16 +69,64 @@ public class Boss : Enemy
         {
             switch (GetCurrentEnemyState)
             {
-                case EnemyStates.Boss_Idle: break;
-                case EnemyStates.Boss_Walk: break;
-                case EnemyStates.Boss_Spit: break;
-                case EnemyStates.Boss_Swipe: break;
-                case EnemyStates.Boss_Jump: break;
-                case EnemyStates.Boss_Land: break;
-                case EnemyStates.Boss_Buff: break;
+                case EnemyStates.Boss_Stage1: break;
+                case EnemyStates.Boss_Stage2: break;
+                case EnemyStates.Boss_Stage3: break;
+                case EnemyStates.Boss_Stage4: break;
             }
         }
     }
+
+    #region Boss_Stage1
+    IEnumerator SwipeAttack()
+    {
+        attacking = true;
+        rb.velocity = Vector2.zero;
+
+        anim.SetTrigger("Swipe");
+        yield return new WaitForSeconds(0.5f);
+        anim.ResetTrigger("Swipe");
+
+        ResetAllAttacks();
+    }
+    #endregion
+
+    //IEnumerator DoubleSpitAttack()
+    //{
+    //    attacking = true;
+    //    rb.velocity = Vector2.zero;
+
+    //    anim.SetTrigger("Spit");
+    //    yield return new WaitForSeconds(0.3f);
+    //    anim.ResetTrigger("Spit");
+
+    //    anim.SetTrigger("Spit");
+    //    yield return new WaitForSeconds(0.5f);
+    //    anim.ResetTrigger("Spit");
+
+    //    ResetAllAttacks();
+    //}
+
+    #region Control Attack
+    public void AttackHandler()
+    {
+        if (currentEnemyState == EnemyStates.Boss_Stage1)
+        {
+            if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
+            {
+                StartCoroutine(SwipeAttack());
+            }
+        }
+    }
+
+    public void ResetAllAttacks()
+    {
+        attacking = false;
+
+        StopCoroutine(SwipeAttack());
+        //StopCoroutine(DoubleSpitAttack());
+    }
+    #endregion
 
     public bool Grounded()
     {
@@ -99,17 +142,17 @@ public class Boss : Enemy
         }
     }
 
-    public void SwapDirection()
+    public void Flip()
     {
         if (DummyController.Instance.transform.position.x < transform.position.x && transform.localScale.x > 0)
         {
             transform.eulerAngles = new Vector2(transform.eulerAngles.x, 180);
-            facingRight = false;
+            facingRight = true;
         }
         else
         {
             transform.eulerAngles = new Vector2(transform.eulerAngles.x, 0);
-            facingRight = true;
+            facingRight = false;
         }
     }
 
@@ -118,39 +161,6 @@ public class Boss : Enemy
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(SideAttackTransform.position, SideAttackArea);
     }
-
-    IEnumerator TripleSwipeAttack()
-    {
-        attacking = true;
-        rb.velocity = Vector2.zero;
-
-        anim.SetTrigger("Swipe");
-        yield return new WaitForSeconds(0.3f);
-        anim.ResetTrigger("Swipe");
-
-        anim.SetTrigger("Swipe");
-        yield return new WaitForSeconds(0.5f);
-        anim.ResetTrigger("Swipe");
-
-        anim.SetTrigger("Swipe");
-        yield return new WaitForSeconds(0.2f);
-        anim.ResetTrigger("Swipe");
-    }
-
-    IEnumerator DoubleSpitAttack()
-    {
-        attacking = true;
-        rb.velocity = Vector2.zero;
-
-        anim.SetTrigger("Spit");
-        yield return new WaitForSeconds(0.3f);
-        anim.ResetTrigger("Spit");
-
-        anim.SetTrigger("Spit");
-        yield return new WaitForSeconds(0.5f);
-        anim.ResetTrigger("Spit");
-    }
-
 
 
 

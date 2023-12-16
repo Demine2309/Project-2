@@ -3,22 +3,34 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected float health;
-    [SerializeField] protected float speed;
+    [SerializeField] public float speed;
     [SerializeField] protected float damage;
 
     protected Rigidbody2D rb;
     protected SpriteRenderer sr;
     protected Animator anim;
 
+    protected virtual void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+    }
+
+    protected virtual void Update()
+    {
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     protected enum EnemyStates
     {
-        Boss_Idle,
-        Boss_Walk,
-        Boss_Spit,
-        Boss_Swipe,
-        Boss_Jump,
-        Boss_Land,
-        Boss_Buff
+        Boss_Stage1,
+        Boss_Stage2,
+        Boss_Stage3,
+        Boss_Stage4
     }
 
     protected EnemyStates currentEnemyState;
@@ -28,7 +40,7 @@ public class Enemy : MonoBehaviour
         get { return currentEnemyState; }
         set
         {
-            if(currentEnemyState != value)
+            if (currentEnemyState != value)
             {
                 currentEnemyState = value;
 
@@ -45,27 +57,7 @@ public class Enemy : MonoBehaviour
         GetCurrentEnemyState = newState;
     }
 
-    protected virtual void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-    }
-
-    protected virtual void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    protected virtual void Update()
-    {
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    protected void OnCollision2D(Collision2D collision)
+    protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Dummy"))
         {

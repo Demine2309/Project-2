@@ -15,7 +15,6 @@ public class Boss_Walk : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb.velocity = Vector2.zero;
         TargetPlayerPosition(animator);
 
         if (Boss.Instance.attackCountdown <= 0)
@@ -29,9 +28,10 @@ public class Boss_Walk : StateMachineBehaviour
     {
         if (Boss.Instance.Grounded())
         {
-            Boss.Instance.SwapDirection();
+            Boss.Instance.Flip();
             Vector2 target = new Vector2(DummyController.Instance.transform.position.x, rb.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, Boss.Instance.walkSpeed * Time.fixedDeltaTime);
+            Boss.Instance.walkSpeed = Boss.Instance.speed;
 
             rb.MovePosition(newPos);
         }
