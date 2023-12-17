@@ -47,7 +47,7 @@ public class Boss : Enemy
         anim = GetComponentInChildren<Animator>();
         alive = true;
 
-        ChangeState(EnemyStates.Boss_Stage1);
+        //ChangeState(EnemyStates.Boss_Stage1);
     }
 
     protected override void Update()
@@ -58,8 +58,6 @@ public class Boss : Enemy
         {
             attackCountdown -= Time.deltaTime;
         }
-
-        Debug.Log(Grounded());
     }
 
 
@@ -84,6 +82,10 @@ public class Boss : Enemy
         rb.velocity = Vector2.zero;
 
         anim.SetTrigger("Swipe");
+        yield return new WaitForSeconds(1.5f);
+        anim.ResetTrigger("Swipe");
+
+        anim.SetTrigger("Swipe");
         yield return new WaitForSeconds(0.5f);
         anim.ResetTrigger("Swipe");
 
@@ -91,21 +93,18 @@ public class Boss : Enemy
     }
     #endregion
 
-    //IEnumerator DoubleSpitAttack()
-    //{
-    //    attacking = true;
-    //    rb.velocity = Vector2.zero;
+    IEnumerator SpitAttack()
+    {
+        attacking = true;
+        rb.velocity = Vector2.zero;
 
-    //    anim.SetTrigger("Spit");
-    //    yield return new WaitForSeconds(0.3f);
-    //    anim.ResetTrigger("Spit");
+        anim.SetTrigger("Spit");
+        yield return new WaitForSeconds(0.3f);
+        anim.ResetTrigger("Spit");
 
-    //    anim.SetTrigger("Spit");
-    //    yield return new WaitForSeconds(0.5f);
-    //    anim.ResetTrigger("Spit");
 
-    //    ResetAllAttacks();
-    //}
+        ResetAllAttacks();
+    }
 
     #region Control Attack
     public void AttackHandler()

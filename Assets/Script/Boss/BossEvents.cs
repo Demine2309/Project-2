@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class BossEvents : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void SwipeDamagePlayer()
     {
-        
+        if (DummyController.Instance.transform.position.x - transform.position.x != 0)
+        {
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Hit(Transform attackTransform, Vector2 attackArea)
     {
-        
+        Collider2D objectsToHit = Physics2D.OverlapBox(attackTransform.position, attackArea, 0);
+
+        if(objectsToHit.GetComponent)
     }
 }
