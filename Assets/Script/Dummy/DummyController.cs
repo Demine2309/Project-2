@@ -45,11 +45,11 @@ public class DummyController : MonoBehaviour
     {
         if (moveDelta.x > 0f)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(1.35f, 1.35f, 1.35f);
         }
         else if (moveDelta.x < 0f)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            transform.localScale = new Vector3(-1.35f, 1.35f, 1.35f);
         }
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_Spit : StateMachineBehaviour
+public class Boss_Land : StateMachineBehaviour
 {
     Rigidbody2D rb;
 

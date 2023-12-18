@@ -6,10 +6,13 @@ public class Boss : Enemy
     public static Boss Instance;
 
     [Header("Attack Settings:")]
-    public Transform SideAttackTransform; //the middle of the side attack area
-    public Vector2 SideAttackArea; //how large the area of side attack is
+    public Transform SideAttackTransform1; // For Swipe attacking   
+    public Vector2 SideAttackArea1; // For Swipe attacking
 
-    public float attackRange;
+    public Transform SideAttackTransform2; // For Spit attacking
+    public Vector2 SideAttackArea2; // For Spit attacking
+
+    public float attackRange1; // For Swipe and spit attacking   
     public float attackTimer;
 
     [HideInInspector] public bool attacking;
@@ -17,13 +20,12 @@ public class Boss : Enemy
 
 
     [Header("Ground Check Settings:")]
-    [SerializeField] public Transform groundCheckPoint; // Point at which ground check happens
-    [SerializeField] private float groundCheckY = 0.2f; // How far down from ground check point is Grounded() checked
-    [SerializeField] private float groundCheckX = 0.5f; // How far horizontally from check point to the edge of the dummy is
-    [SerializeField] private LayerMask whatIsGround; // Sets the ground layer
+    [SerializeField] public Transform groundCheckPoint; 
+    [SerializeField] private float groundCheckY = 0.2f; 
+    [SerializeField] private float groundCheckX = 0.5f; 
+    [SerializeField] private LayerMask whatIsGround; 
 
     private bool alive;
-
     [HideInInspector] public bool facingRight;
     [HideInInspector] public float walkSpeed;
 
@@ -102,7 +104,6 @@ public class Boss : Enemy
         yield return new WaitForSeconds(0.3f);
         anim.ResetTrigger("Spit");
 
-
         ResetAllAttacks();
     }
 
@@ -111,9 +112,9 @@ public class Boss : Enemy
     {
         if (currentEnemyState == EnemyStates.Boss_Stage1)
         {
-            if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
+            if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange1)
             {
-                StartCoroutine(SwipeAttack());
+                ManageTypeOfAttack();
             }
         }
     }
@@ -123,7 +124,21 @@ public class Boss : Enemy
         attacking = false;
 
         StopCoroutine(SwipeAttack());
-        //StopCoroutine(DoubleSpitAttack());
+        StopCoroutine(SpitAttack());
+    }
+
+    public void ManageTypeOfAttack()
+    {
+        float randomValue = Random.value;
+
+        if (randomValue < 0.5f)
+        {
+            StartCoroutine(SwipeAttack());
+        }
+        else
+        {
+            StartCoroutine(SpitAttack());
+        }
     }
     #endregion
 
@@ -158,7 +173,8 @@ public class Boss : Enemy
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(SideAttackTransform.position, SideAttackArea);
+        Gizmos.DrawWireCube(SideAttackTransform1.position, SideAttackArea1);
+        Gizmos.DrawWireCube(SideAttackTransform2.position, SideAttackArea2);
     }
 
 

@@ -16,7 +16,7 @@ public class Boss_Idle : StateMachineBehaviour
         rb.velocity = Vector2.zero;
         RunToPlayer(animator);
 
-        if(Boss.Instance.attackCountdown <= 0)
+        if (Boss.Instance.attackCountdown <= 0)
         {
             Boss.Instance.AttackHandler();
             Boss.Instance.attackCountdown = Random.Range(Boss.Instance.attackTimer - 1, Boss.Instance.attackTimer + 1);
@@ -26,7 +26,7 @@ public class Boss_Idle : StateMachineBehaviour
 
     private void RunToPlayer(Animator animator)
     {
-        if(Vector2.Distance(DummyController.Instance.transform.position, rb.position) >= Boss.Instance.attackRange)
+        if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) >= Boss.Instance.attackRange1 - 2f)
         {
             animator.SetBool("Walk", true);
         }
