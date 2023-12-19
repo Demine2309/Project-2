@@ -135,10 +135,3 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.75
-    functionName: SwipeDamageDummy
-    data: 
-    objectReferenceParameter: {fileID: -847096641, guid: d4f2bcbe2d73f654489341586686bc57, type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0

@@ -1,18 +1,26 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Boss : Enemy
 {
     public static Boss Instance;
 
+    [SerializeField] private float distance;
+
     [Header("Attack Settings:")]
-    public Transform SideAttackTransform1; // For Swipe attacking   
-    public Vector2 SideAttackArea1; // For Swipe attacking
+    public Transform sideAttackTransform1; // For Swipe attacking   
+    public Vector2 sideAttackArea1; // For Swipe attacking
 
-    public Transform SideAttackTransform2; // For Spit attacking
-    public Vector2 SideAttackArea2; // For Spit attacking
+    public Transform sideAttackTransform2; // For Spit attacking
+    public Vector2 sideAttackArea2; // For Spit attacking
 
-    public float attackRange1; // For Swipe and spit attacking   
+    public Transform landAttackTransform;
+    public Vector2 LandAttackArea;
+
+    public float attackRange;
+    public float jumpAttackRange;
     public float attackTimer;
 
     [HideInInspector] public bool attacking;
@@ -20,14 +28,15 @@ public class Boss : Enemy
 
 
     [Header("Ground Check Settings:")]
-    [SerializeField] public Transform groundCheckPoint; 
-    [SerializeField] private float groundCheckY = 0.2f; 
-    [SerializeField] private float groundCheckX = 0.5f; 
-    [SerializeField] private LayerMask whatIsGround; 
+    [SerializeField] public Transform groundCheckPoint;
+    [SerializeField] private float groundCheckY = 0.2f;
+    [SerializeField] private float groundCheckX = 0.5f;
+    [SerializeField] private LayerMask whatIsGround;
 
     private bool alive;
     [HideInInspector] public bool facingRight;
     [HideInInspector] public float walkSpeed;
+
 
     private void Awake()
     {
@@ -47,17 +56,18 @@ public class Boss : Enemy
 
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
-        alive = true;
     }
 
     protected override void Update()
     {
         base.Update();
 
-        if(!attacking)
+        if (!attacking)
         {
             attackCountdown -= Time.deltaTime;
         }
+
+        distance = Vector2.Distance(DummyController.Instance.transform.position, rb.position);
     }
 
 
@@ -82,10 +92,6 @@ public class Boss : Enemy
         rb.velocity = Vector2.zero;
 
         anim.SetTrigger("Swipe");
-        yield return new WaitForSeconds(1.5f);
-        anim.ResetTrigger("Swipe");
-
-        anim.SetTrigger("Swipe");
         yield return new WaitForSeconds(1f);
         anim.ResetTrigger("Swipe");
 
@@ -98,7 +104,7 @@ public class Boss : Enemy
         rb.velocity = Vector2.zero;
 
         anim.SetTrigger("Spit");
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
         anim.ResetTrigger("Spit");
 
         ResetAllAttacks();
@@ -126,7 +132,7 @@ public class Boss : Enemy
     {
         if (currentEnemyState == EnemyStates.Boss_Stage1)
         {
-            if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange1)
+            if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
             {
                 ManageTypeOfAttack();
             }
@@ -150,7 +156,7 @@ public class Boss : Enemy
         {
             StartCoroutine(SwipeAttack());
         }
-        else if(randomValue < 0.66f)
+        else if (randomValue < 0.66f)
         {
             StartCoroutine(SpitAttack());
         }
@@ -192,7 +198,14 @@ public class Boss : Enemy
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(SideAttackTransform1.position, SideAttackArea1);
-        Gizmos.DrawWireCube(SideAttackTransform2.position, SideAttackArea2);
+        Gizmos.DrawWireCube(sideAttackTransform1.position, sideAttackArea1);
+        Gizmos.DrawWireCube(sideAttackTransform2.position, sideAttackArea2);
+        Gizmos.DrawWireCube(landAttackTransform.position, LandAttackArea);
+
+        if (Boss.Instance != null)
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(DummyController.Instance.transform.position, rb.position);
+        }
     }
 }

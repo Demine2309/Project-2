@@ -8,7 +8,7 @@ public class BossEvents : MonoBehaviour
     {
         if (DummyController.Instance.transform.position.x - transform.position.x != 0)
         {
-            Hit(Boss.Instance.SideAttackTransform1, Boss.Instance.SideAttackArea1);
+            Hit(Boss.Instance.sideAttackTransform1, Boss.Instance.sideAttackArea1);
         }
     }
 
@@ -16,9 +16,16 @@ public class BossEvents : MonoBehaviour
     {
         if (DummyController.Instance.transform.position.x - transform.position.x != 0)
         {
-            Hit(Boss.Instance.SideAttackTransform2, Boss.Instance.SideAttackArea2);
+            Hit(Boss.Instance.sideAttackTransform2, Boss.Instance.sideAttackArea2);
         }
+    }
 
+    void LandDamageDummy()
+    {
+        if (DummyController.Instance.transform.position.x - transform.position.x != 0)
+        {
+            Hit(Boss.Instance.landAttackTransform, Boss.Instance.LandAttackArea);
+        }
     }
 
     void Hit(Transform attackTransform, Vector2 attackArea)
