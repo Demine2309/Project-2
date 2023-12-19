@@ -371,7 +371,7 @@ MonoBehaviour:
   sideAttackArea2: {x: 4.68, y: 1}
   landAttackTransform: {fileID: 1612956615}
   LandAttackArea: {x: 12.3, y: 2.55}
-  attackRange: 5.8
+  attackRange: 5.7
   jumpAttackRange: 9.5
   attackTimer: 1.5
   attacking: 0

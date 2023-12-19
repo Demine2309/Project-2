@@ -43,6 +43,7 @@ public class Boss : Enemy
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            alive = true;
         }
         else
         {
@@ -68,8 +69,9 @@ public class Boss : Enemy
         }
 
         distance = Vector2.Distance(DummyController.Instance.transform.position, rb.position);
-    }
 
+        Debug.Log(currentEnemyState);
+    }
 
     protected override void UpdateEnemyStates()
     {
@@ -77,10 +79,14 @@ public class Boss : Enemy
         {
             switch (GetCurrentEnemyState)
             {
-                case EnemyStates.Boss_Stage1: break;
-                case EnemyStates.Boss_Stage2: break;
-                case EnemyStates.Boss_Stage3: break;
-                case EnemyStates.Boss_Stage4: break;
+                case EnemyStates.Boss_Stage1:
+                    break;
+                case EnemyStates.Boss_Stage2:
+                    break;
+                case EnemyStates.Boss_Stage3:
+                    break;
+                case EnemyStates.Boss_Stage4:
+                    break;
             }
         }
     }
@@ -110,18 +116,12 @@ public class Boss : Enemy
         ResetAllAttacks();
     }
 
-    IEnumerator Combo1()
+    IEnumerator JumpAttack()
     {
         attacking = true;
-        rb.velocity = Vector2.zero;
 
-        anim.SetTrigger("Swipe");
-        yield return new WaitForSeconds(2f);
-        anim.ResetTrigger("Swipe");
-
-        anim.SetTrigger("Spit");
+        anim.SetTrigger("Jump");
         yield return new WaitForSeconds(1f);
-        anim.ResetTrigger("Spit");
 
         ResetAllAttacks();
     }
@@ -132,9 +132,17 @@ public class Boss : Enemy
     {
         if (currentEnemyState == EnemyStates.Boss_Stage1)
         {
-            if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
+            float randomValue = Random.value;
+            if(randomValue < 0.5f)
             {
-                ManageTypeOfAttack();
+                if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
+                {
+                    ManageTypeOfAttack();
+                }
+            }
+            else
+            {
+                StartCoroutine(JumpAttack());
             }
         }
     }
@@ -145,24 +153,20 @@ public class Boss : Enemy
 
         StopCoroutine(SwipeAttack());
         StopCoroutine(SpitAttack());
-        StopCoroutine(Combo1());
+        StopCoroutine(JumpAttack());
     }
 
     public void ManageTypeOfAttack()
     {
         float randomValue = Random.value;
 
-        if (randomValue < 0.33f)
+        if (randomValue < 0.5f)
         {
             StartCoroutine(SwipeAttack());
         }
-        else if (randomValue < 0.66f)
-        {
-            StartCoroutine(SpitAttack());
-        }
         else
         {
-            StartCoroutine(Combo1());
+            StartCoroutine(SpitAttack());
         }
     }
     #endregion
@@ -201,11 +205,5 @@ public class Boss : Enemy
         Gizmos.DrawWireCube(sideAttackTransform1.position, sideAttackArea1);
         Gizmos.DrawWireCube(sideAttackTransform2.position, sideAttackArea2);
         Gizmos.DrawWireCube(landAttackTransform.position, LandAttackArea);
-
-        if (Boss.Instance != null)
-        {
-            Gizmos.color = Color.white;
-            Gizmos.DrawLine(DummyController.Instance.transform.position, rb.position);
-        }
     }
 }

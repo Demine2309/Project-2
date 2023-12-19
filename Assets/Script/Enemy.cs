@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else
+        {
+            UpdateEnemyStates();
+        }
     }
 
     protected enum EnemyStates
@@ -68,10 +72,5 @@ public class Enemy : MonoBehaviour
     protected virtual void Attack()
     {
         DummyController.Instance.TakeDamage(damage);
-    }
-
-    protected virtual void Death(float destroyTime)
-    {
-        Destroy(gameObject, destroyTime);
     }
 }

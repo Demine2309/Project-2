@@ -1538,10 +1538,10 @@ TextureImporter:
       name: Death_10
       rect:
         serializedVersion: 2
-        x: 2017
+        x: 1979
         y: 0
-        width: 119
-        height: 7
+        width: 157
+        height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2231,10 +2231,10 @@ TextureImporter:
       name: Death_11
       rect:
         serializedVersion: 2
-        x: 2394
+        x: 2329
         y: 0
-        width: 28
-        height: 7
+        width: 157
+        height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2276,7 +2276,7 @@ TextureImporter:
         x: 1319
         y: 0
         width: 163
-        height: 55
+        height: 65
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2297,7 +2297,7 @@ TextureImporter:
         x: 1504
         y: 0
         width: 167
-        height: 55
+        height: 66
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2318,7 +2318,7 @@ TextureImporter:
         x: 1691
         y: 0
         width: 135
-        height: 46
+        height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2349,6 +2349,48 @@ TextureImporter:
       bones: []
       spriteID: b7fbb9a235c93024ea113c5dd92023b0
       internalID: 741030071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_3_Jump_15
+      rect:
+        serializedVersion: 2
+        x: 2873
+        y: 322
+        width: 62
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 690e54e834733344f8bd64dfa17e71b7
+      internalID: 102980260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_3_Jump_16
+      rect:
+        serializedVersion: 2
+        x: 2967
+        y: 323
+        width: 43
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63509d3b08b02a945a364e1c78cb7858
+      internalID: 1084434336
       vertices: []
       indices: 
       edges: []
@@ -2405,6 +2447,8 @@ TextureImporter:
       Attack_3_Jump_12: -1958707029
       Attack_3_Jump_13: -444001745
       Attack_3_Jump_14: 741030071
+      Attack_3_Jump_15: 102980260
+      Attack_3_Jump_16: 1084434336
       Attack_3_Jump_2: 1399366711
       Attack_3_Jump_3: -1223404567
       Attack_3_Jump_4: 1024256486
@@ -2458,6 +2502,7 @@ TextureImporter:
       Idle_6: -33203627
       Idle_7: -1223561259
       Idle_8: 1889293035
+      The Tarnished Widow 188x90_0: 1163853567
       The Tarnished Widow 188x90_100: -236352260
       The Tarnished Widow 188x90_101: -1906842555
       The Tarnished Widow 188x90_102: -451780686
