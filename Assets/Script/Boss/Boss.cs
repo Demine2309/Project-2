@@ -129,7 +129,7 @@ public class Boss : Enemy
     IEnumerator JumpShortAttack()
     {
         attacking = true;
-        //rb.velocity = Vector2.zero;
+        rb.velocity = Vector2.zero;
 
         anim.SetTrigger("JumpShort");
         yield return new WaitForSeconds(1f);
