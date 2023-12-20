@@ -69,8 +69,6 @@ public class Boss : Enemy
         }
 
         distance = Vector2.Distance(DummyController.Instance.transform.position, rb.position);
-
-        Debug.Log(currentEnemyState);
     }
 
     protected override void UpdateEnemyStates()
@@ -121,7 +119,21 @@ public class Boss : Enemy
         attacking = true;
 
         anim.SetTrigger("Jump");
+        yield return new WaitForSeconds(2f);
+
+        anim.SetBool("Suspended", true);
+
+        ResetAllAttacks();
+    }
+
+    IEnumerator JumpShortAttack()
+    {
+        attacking = true;
+        //rb.velocity = Vector2.zero;
+
+        anim.SetTrigger("JumpShort");
         yield return new WaitForSeconds(1f);
+        anim.ResetTrigger("JumpShort");
 
         ResetAllAttacks();
     }
@@ -133,12 +145,15 @@ public class Boss : Enemy
         if (currentEnemyState == EnemyStates.Boss_Stage1)
         {
             float randomValue = Random.value;
-            if(randomValue < 0.5f)
+            if(randomValue < 0.75f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
-                {
                     ManageTypeOfAttack();
-                }
+            }
+            else if (randomValue < 0.95f)
+            {
+                if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= jumpAttackRange)
+                    StartCoroutine(JumpShortAttack());
             }
             else
             {
@@ -154,6 +169,7 @@ public class Boss : Enemy
         StopCoroutine(SwipeAttack());
         StopCoroutine(SpitAttack());
         StopCoroutine(JumpAttack());
+        StopCoroutine(JumpShortAttack());
     }
 
     public void ManageTypeOfAttack()

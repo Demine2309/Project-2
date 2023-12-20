@@ -28,6 +28,14 @@ public class BossEvents : MonoBehaviour
         }
     }
 
+    void ShortJumpDamageDummy()
+    {
+        if (DummyController.Instance.transform.position.x - transform.position.x != 0)
+        {
+            Hit(Boss.Instance.landAttackTransform, Boss.Instance.LandAttackArea);
+        }
+    }
+
     void Hit(Transform attackTransform, Vector2 attackArea)
     {
         Collider2D objectsToHit = Physics2D.OverlapBox(attackTransform.position, attackArea, 0);
