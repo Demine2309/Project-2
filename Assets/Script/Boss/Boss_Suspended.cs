@@ -6,7 +6,7 @@ public class Boss_Suspended : StateMachineBehaviour
 {
     private Rigidbody2D rb;
 
-    public float heightOffset = 2.5f;
+    public float heightOffset;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

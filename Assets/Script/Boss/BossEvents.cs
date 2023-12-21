@@ -8,7 +8,7 @@ public class BossEvents : MonoBehaviour
     {
         if (DummyController.Instance.transform.position.x - transform.position.x != 0)
         {
-            Hit(Boss.Instance.sideAttackTransform1, Boss.Instance.sideAttackArea1);
+            SwipeHit(Boss.Instance.sideAttackTransform1, Boss.Instance.sideAttackArea1);
         }
     }
 
@@ -16,15 +16,15 @@ public class BossEvents : MonoBehaviour
     {
         if (DummyController.Instance.transform.position.x - transform.position.x != 0)
         {
-            Hit(Boss.Instance.sideAttackTransform2, Boss.Instance.sideAttackArea2);
+            SpitHit(Boss.Instance.sideAttackTransform2, Boss.Instance.sideAttackArea2);
         }
     }
 
-    void LandDamageDummy()
+    void HighJumpDamageDummy()
     {
         if (DummyController.Instance.transform.position.x - transform.position.x != 0)
         {
-            Hit(Boss.Instance.landAttackTransform, Boss.Instance.LandAttackArea);
+            HighJumpHit(Boss.Instance.landAttackTransform, Boss.Instance.LandAttackArea);
         }
     }
 
@@ -32,17 +32,47 @@ public class BossEvents : MonoBehaviour
     {
         if (DummyController.Instance.transform.position.x - transform.position.x != 0)
         {
-            Hit(Boss.Instance.landAttackTransform, Boss.Instance.LandAttackArea);
+            ShortJumpHit(Boss.Instance.landAttackTransform, Boss.Instance.LandAttackArea);
         }
     }
 
-    void Hit(Transform attackTransform, Vector2 attackArea)
+    void SwipeHit(Transform attackTransform, Vector2 attackArea)
     {
         Collider2D objectsToHit = Physics2D.OverlapBox(attackTransform.position, attackArea, 0);
 
         if(objectsToHit.GetComponent<DummyController>() != null)
         {
-            objectsToHit.GetComponent<DummyController>().TakeDamage(Boss.Instance.damage);
+            objectsToHit.GetComponent<DummyController>().TakeDamage(Boss.Instance.damageSwipe);
+        }
+    }
+
+    void SpitHit(Transform attackTransform, Vector2 attackArea)
+    {
+        Collider2D objectsToHit = Physics2D.OverlapBox(attackTransform.position, attackArea, 0);
+
+        if (objectsToHit.GetComponent<DummyController>() != null)
+        {
+            objectsToHit.GetComponent<DummyController>().TakeDamage(Boss.Instance.damageSpit);
+        }
+    }
+
+    void HighJumpHit(Transform attackTransform, Vector2 attackArea)
+    {
+        Collider2D objectsToHit = Physics2D.OverlapBox(attackTransform.position, attackArea, 0);
+
+        if (objectsToHit.GetComponent<DummyController>() != null)
+        {
+            objectsToHit.GetComponent<DummyController>().TakeDamage(Boss.Instance.damageHighJump);
+        }
+    }
+
+    void ShortJumpHit(Transform attackTransform, Vector2 attackArea)
+    {
+        Collider2D objectsToHit = Physics2D.OverlapBox(attackTransform.position, attackArea, 0);
+
+        if (objectsToHit.GetComponent<DummyController>() != null)
+        {
+            objectsToHit.GetComponent<DummyController>().TakeDamage(Boss.Instance.damageShortJump);
         }
     }
 }

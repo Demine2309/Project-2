@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected float health;
     [SerializeField] public float speed;
-    [SerializeField] public float damage;
+    [SerializeField] protected float damage;
 
     protected Rigidbody2D rb;
     protected SpriteRenderer sr;

@@ -26,6 +26,11 @@ public class Boss : Enemy
     [HideInInspector] public bool attacking;
     [HideInInspector] public float attackCountdown;
 
+    [Header("Damage Settings:")]
+    public float damageSwipe = 25f;
+    public float damageSpit = 25;
+    public float damageShortJump = 25f;
+    public float damageHighJump = 25f;
 
     [Header("Ground Check Settings:")]
     [SerializeField] public Transform groundCheckPoint;
