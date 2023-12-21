@@ -268,7 +268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267353656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4144793, y: 0.81851006, z: 0}
+  m_LocalPosition: {x: -0.9694538, y: 0.81772006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -399,7 +399,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 9.5
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -426,7 +426,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -799,7 +799,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.248906, y: 0.37149, z: -20}
+  m_LocalPosition: {x: -8.138948, y: 0.37228, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 683671066}
   - component: {fileID: 683671068}
   - component: {fileID: 683671069}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -1631,7 +1631,7 @@ GameObject:
   - component: {fileID: 1362547760}
   - component: {fileID: 1362547759}
   - component: {fileID: 1362547758}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dummy
   m_TagString: Dummy
   m_Icon: {fileID: 0}
@@ -1693,7 +1693,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

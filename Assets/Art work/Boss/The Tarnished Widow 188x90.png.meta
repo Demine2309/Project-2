@@ -2395,6 +2395,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Attack_3_Land_00
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 200
+        width: 50
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ff22752ed85e05489318461832f292b
+      internalID: -1758246874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2458,6 +2479,7 @@ TextureImporter:
       Attack_3_Jump_8: -754887611
       Attack_3_Jump_9: 1539977135
       Attack_3_Land_0: 1608277266
+      Attack_3_Land_00: 1163853567
       Attack_3_Land_1: 941378951
       Attack_3_Land_2: -81892207
       Attack_3_Land_3: 489580428
@@ -2502,7 +2524,6 @@ TextureImporter:
       Idle_6: -33203627
       Idle_7: -1223561259
       Idle_8: 1889293035
-      The Tarnished Widow 188x90_0: 1163853567
       The Tarnished Widow 188x90_100: -236352260
       The Tarnished Widow 188x90_101: -1906842555
       The Tarnished Widow 188x90_102: -451780686
