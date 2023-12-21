@@ -127,8 +127,6 @@ public class Boss : Enemy
         yield return new WaitForSeconds(2f);
 
         anim.SetBool("Suspended", true);
-        yield return new WaitForSeconds(1f);    
-
 
         if(Grounded() == true)
         {
@@ -157,12 +155,12 @@ public class Boss : Enemy
         if (currentEnemyState == EnemyStates.Boss_Stage1)
         {
             float randomValue = Random.value;
-            if(randomValue < 0.65f)
+            if(randomValue < 0.2f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
                     ManageTypeOfAttack();
             }
-            else if (randomValue < 0.9f)
+            else if (randomValue < 0.4f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= jumpAttackRange)
                     StartCoroutine(ShortJumpAttack());

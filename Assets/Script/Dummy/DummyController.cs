@@ -5,7 +5,7 @@ using UnityEngine;
 public class DummyController : MonoBehaviour
 {
     public static DummyController Instance;
-
+   
     private Rigidbody2D rb;
     private Vector2 moveDelta;
     protected float x = 0f;
@@ -56,5 +56,9 @@ public class DummyController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= Mathf.RoundToInt(damage);
+
+        // Trigger damage text
+
     }
+
 }
