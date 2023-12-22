@@ -40,15 +40,12 @@ public class Boss : Enemy
 
     private bool alive;
     [HideInInspector] public bool facingRight;
-    [HideInInspector] public float walkSpeed;
-
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-            alive = true;
         }
         else
         {
@@ -82,19 +79,15 @@ public class Boss : Enemy
         {
             switch (GetCurrentEnemyState)
             {
-                case EnemyStates.Boss_Stage1:
+                case EnemyStates.Boss_State1:
                     break;
-                case EnemyStates.Boss_Stage2:
-                    break;
-                case EnemyStates.Boss_Stage3:
-                    break;
-                case EnemyStates.Boss_Stage4:
+                case EnemyStates.Boss_State2:
                     break;
             }
         }
     }
 
-    #region Boss_Stage1
+    #region Boss_State1
     IEnumerator SwipeAttack()
     {
         attacking = true;
@@ -127,8 +120,9 @@ public class Boss : Enemy
         yield return new WaitForSeconds(2f);
 
         anim.SetTrigger("Suspended");
+        yield return new WaitForSeconds(1f);
 
-        if(Grounded() == true)
+        if (Grounded() == true)
         {
             anim.SetTrigger("Land");
         }
@@ -152,16 +146,16 @@ public class Boss : Enemy
     #region Control Attack
     public void AttackHandler()
     {
-        if (currentEnemyState == EnemyStates.Boss_Stage1)
+        if (currentEnemyState == EnemyStates.Boss_State1)
         {
             float randomValue = Random.value;
 
-            if(randomValue < 0.75f)
+            if(randomValue < 0.8f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
                     ManageTypeOfAttack();
             }
-            else if (randomValue < 0.92f)
+            else if (randomValue < 0.9f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= jumpAttackRange)
                     StartCoroutine(ShortJumpAttack());
@@ -214,14 +208,14 @@ public class Boss : Enemy
 
     public void Flip()
     {
-        if (DummyController.Instance.transform.position.x < Boss.Instance.transform.position.x)
+        if (DummyController.Instance.transform.position.x < transform.position.x && transform.localScale.x > 0)
         {
-            Boss.Instance.transform.localScale = new Vector3(-2.1f, 2.1f, 2f);
+            transform.eulerAngles = new Vector2(transform.eulerAngles.x, 180);
             facingRight = true;
         }
         else
         {
-            Boss.Instance.transform.localScale = new Vector3(2.1f, 2.1f, 2f);
+            transform.eulerAngles = new Vector2(transform.eulerAngles.x, 0);
             facingRight = false;
         }
     }
@@ -229,6 +223,7 @@ public class Boss : Enemy
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
+
         Gizmos.DrawWireCube(sideAttackTransform1.position, sideAttackArea1);
         Gizmos.DrawWireCube(sideAttackTransform2.position, sideAttackArea2);
         Gizmos.DrawWireCube(landAttackTransform.position, LandAttackArea);

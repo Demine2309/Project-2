@@ -29,9 +29,9 @@ public class Boss_Walk : StateMachineBehaviour
         if (Boss.Instance.Grounded())
         {
             Boss.Instance.Flip();
+
             Vector2 target = new Vector2(DummyController.Instance.transform.position.x, rb.position.y);
-            Vector2 newPos = Vector2.MoveTowards(rb.position, target, Boss.Instance.walkSpeed * Time.fixedDeltaTime);
-            Boss.Instance.walkSpeed = Boss.Instance.speed;
+            Vector2 newPos = Vector2.MoveTowards(rb.position, target, Boss.Instance.speed * Time.fixedDeltaTime);
 
             rb.MovePosition(newPos);
         }

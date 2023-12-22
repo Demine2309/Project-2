@@ -31,10 +31,8 @@ public class Enemy : MonoBehaviour
 
     protected enum EnemyStates
     {
-        Boss_Stage1,
-        Boss_Stage2,
-        Boss_Stage3,
-        Boss_Stage4
+        Boss_State1,
+        Boss_State2
     }
 
     protected EnemyStates currentEnemyState;

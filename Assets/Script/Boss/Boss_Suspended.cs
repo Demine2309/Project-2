@@ -17,7 +17,7 @@ public class Boss_Suspended : StateMachineBehaviour
         {
             Vector2 targetPosition = new Vector2(DummyController.Instance.transform.position.x, DummyController.Instance.transform.position.y + heightOffset);
 
-            rb.transform.SetPositionAndRotation(targetPosition, rb.transform.rotation);
+            Boss.Instance.transform.SetPositionAndRotation(targetPosition, rb.transform.rotation);
         }
     }
 

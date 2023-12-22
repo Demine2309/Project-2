@@ -9,6 +9,8 @@ public class DummyController : MonoBehaviour
     public GameObject popupDamagePrefab;
 
     private Rigidbody2D rb;
+    public SpriteRenderer sr;
+
     private Vector2 moveDelta;
     protected float x = 0f;
     private long health;
@@ -19,7 +21,7 @@ public class DummyController : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
             Instance = this;
 
         health = long.MaxValue;
@@ -28,6 +30,7 @@ public class DummyController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -35,7 +38,7 @@ public class DummyController : MonoBehaviour
         x = Input.GetAxis("Horizontal");
         moveDelta = new Vector2(x, 0f);
 
-        SwapDirection();
+        Flip();
     }
 
     private void FixedUpdate()
@@ -43,15 +46,15 @@ public class DummyController : MonoBehaviour
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
     }
 
-    private void SwapDirection()
+    private void Flip()
     {
         if (moveDelta.x > 0f)
         {
-            transform.localScale = new Vector3(1.35f, 1.35f, 1.35f);
+            sr.flipX = false;
         }
         else if (moveDelta.x < 0f)
         {
-            transform.localScale = new Vector3(-1.35f, 1.35f, 1.35f);
+            sr.flipX = true;
         }
     }
 
