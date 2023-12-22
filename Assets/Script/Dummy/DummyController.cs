@@ -5,7 +5,9 @@ using UnityEngine;
 public class DummyController : MonoBehaviour
 {
     public static DummyController Instance;
-   
+
+    public GameObject popupDamagePrefab;
+
     private Rigidbody2D rb;
     private Vector2 moveDelta;
     protected float x = 0f;
@@ -57,8 +59,7 @@ public class DummyController : MonoBehaviour
     {
         health -= Mathf.RoundToInt(damage);
 
-        // Trigger damage text
-
+        // Popup
+        Instantiate(popupDamagePrefab, transform.position, Quaternion.identity);
     }
-
 }

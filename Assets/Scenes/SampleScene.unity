@@ -1654,6 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38cd3c7840f49b4d974e87c785cf733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popupDamagePrefab: {fileID: 6030708929667883342, guid: 8d55a869f58b5634e847da24592c633b, type: 3}
   speed: 7
 --- !u!50 &1362547759
 Rigidbody2D:

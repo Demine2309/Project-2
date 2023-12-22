@@ -126,7 +126,7 @@ public class Boss : Enemy
         anim.SetTrigger("Jump");
         yield return new WaitForSeconds(2f);
 
-        anim.SetBool("Suspended", true);
+        anim.SetTrigger("Suspended");
 
         if(Grounded() == true)
         {
@@ -155,12 +155,13 @@ public class Boss : Enemy
         if (currentEnemyState == EnemyStates.Boss_Stage1)
         {
             float randomValue = Random.value;
-            if(randomValue < 0.2f)
+
+            if(randomValue < 0.75f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
                     ManageTypeOfAttack();
             }
-            else if (randomValue < 0.4f)
+            else if (randomValue < 0.92f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= jumpAttackRange)
                     StartCoroutine(ShortJumpAttack());
@@ -213,14 +214,14 @@ public class Boss : Enemy
 
     public void Flip()
     {
-        if (DummyController.Instance.transform.position.x < transform.position.x && transform.localScale.x > 0)
+        if (DummyController.Instance.transform.position.x < Boss.Instance.transform.position.x)
         {
-            transform.eulerAngles = new Vector2(transform.eulerAngles.x, 180);
+            Boss.Instance.transform.localScale = new Vector3(-2.1f, 2.1f, 2f);
             facingRight = true;
         }
         else
         {
-            transform.eulerAngles = new Vector2(transform.eulerAngles.x, 0);
+            Boss.Instance.transform.localScale = new Vector3(2.1f, 2.1f, 2f);
             facingRight = false;
         }
     }
