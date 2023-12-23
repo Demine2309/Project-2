@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DummyController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class DummyController : MonoBehaviour
     private Vector2 moveDelta;
     protected float x = 0f;
     private long health;
+
+    public TextMesh popUpText;
 
 
     [SerializeField] private float speed = 20f;
@@ -62,6 +65,7 @@ public class DummyController : MonoBehaviour
     {
         health -= Mathf.RoundToInt(damage);
 
+        popUpText.text = "-" + damage.ToString();
         // Popup
         Instantiate(popupDamagePrefab, transform.position, Quaternion.identity);
     }
