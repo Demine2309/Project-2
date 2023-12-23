@@ -364,6 +364,8 @@ MonoBehaviour:
   speed: 2
   damage: 0
   distance: 0
+  runSpeed: 0
+  facingRight: 0
   sideAttackTransform1: {fileID: 72213212}
   sideAttackArea1: {x: 4.37, y: 1.4}
   sideAttackTransform2: {fileID: 684489695}
@@ -372,7 +374,7 @@ MonoBehaviour:
   LandAttackArea: {x: 12.3, y: 2.55}
   attackRange: 5.7
   jumpAttackRange: 7
-  attackTimer: 1.5
+  attackTimer: 2
   attacking: 0
   attackCountdown: 0
   damageSwipe: 20
@@ -385,7 +387,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  facingRight: 0
 --- !u!50 &279234392
 Rigidbody2D:
   serializedVersion: 4

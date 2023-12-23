@@ -51,6 +51,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    protected virtual void EnemyGetsHit(float damageDone)
+    {
+        health -= damageDone;
+    }
+
+    protected virtual void Death(float _destroyTime)
+    {
+        Destroy(gameObject, _destroyTime);
+    }
+
     protected virtual void UpdateEnemyStates() { }
     protected virtual void ChangeCurrentAnimation() { }
 

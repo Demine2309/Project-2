@@ -18,6 +18,13 @@ public class DummyController : MonoBehaviour
 
     public TextMesh popUpText;
 
+    [Header("Recoil Settings:")]
+    [HideInInspector] public bool recoilingX;
+    [HideInInspector] public bool lookingRight;
+    [SerializeField] private float recoilXSpeed = 100;
+    [SerializeField] private int recoilXSteps = 5;
+    private int stepsXRecoiled;
+    [Space(5)]
 
     [SerializeField] private float speed = 20f;
 
@@ -39,7 +46,6 @@ public class DummyController : MonoBehaviour
     private void Update()
     {
         x = Input.GetAxis("Horizontal");
-        moveDelta = new Vector2(x, 0f);
 
         Flip();
     }
@@ -47,18 +53,52 @@ public class DummyController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
+        Recoil();
     }
 
     private void Flip()
     {
-        if (moveDelta.x > 0f)
+        if (x < 0f)
         {
-            sr.flipX = false;
+            transform.eulerAngles = new Vector2(0, 180);
+            lookingRight = false;
         }
-        else if (moveDelta.x < 0f)
+        else if (x > 0f)
         {
-            sr.flipX = true;
+            transform.eulerAngles = new Vector2(0, 0);
+            lookingRight = true;
         }
+    }
+
+    private void Recoil()
+    {
+        if(recoilingX)
+        {
+            if (lookingRight)
+            {
+                rb.velocity = new Vector2(-recoilXSpeed, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(recoilXSpeed, 0);
+            }
+        }
+
+        // Stop recoil
+        if(recoilingX && stepsXRecoiled < recoilXSteps)
+        {
+            stepsXRecoiled++;
+        }
+        else
+        {
+            StopRecoilX();
+        }
+    }
+
+    private void StopRecoilX()
+    {
+        stepsXRecoiled = 0;
+        recoilingX = false;
     }
 
     public void TakeDamage(float damage)
