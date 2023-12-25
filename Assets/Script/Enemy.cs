@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected float health;
+    [SerializeField] public float health;
     [SerializeField] public float speed;
     [SerializeField] protected float damage;
 
@@ -49,11 +49,6 @@ public class Enemy : MonoBehaviour
                 ChangeCurrentAnimation();
             }
         }
-    }
-
-    protected virtual void EnemyGetsHit(float damageDone)
-    {
-        health -= damageDone;
     }
 
     protected virtual void Death(float _destroyTime)

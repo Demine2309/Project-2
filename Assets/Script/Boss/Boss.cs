@@ -74,6 +74,18 @@ public class Boss : Enemy
         }
 
         distance = Vector2.Distance(DummyController.Instance.transform.position, rb.position);
+
+        //if (health < 2309 / 3)
+        //{
+        //    ChangeState(EnemyStates.Boss_State2);
+        //    anim.SetTrigger("Buff");
+        //}
+
+        //if (health <= 0)
+        //{
+        //    Death(0);
+        //    anim.SetTrigger("Death");
+        //}
     }
 
     protected override void UpdateEnemyStates()
@@ -137,9 +149,6 @@ public class Boss : Enemy
         {
             anim.SetTrigger("Land");
         }
-
-        anim.ResetTrigger("Land");
-        anim.ResetTrigger("Jump");
 
         ResetAllAttacks();
     }
@@ -216,7 +225,7 @@ public class Boss : Enemy
         {
             float randomValue = Random.value;
 
-            if (randomValue < 0.8f)
+            if (randomValue < 0.75f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
                     ManageTypeOfAttack1();
@@ -281,6 +290,7 @@ public class Boss : Enemy
             StartCoroutine(SpitAttack());
         }
     }
+
     public void ManageTypeOfAttack2()
     {
         float randomValue = Random.value;
@@ -295,21 +305,6 @@ public class Boss : Enemy
         }
     }
     #endregion
-
-    protected override void EnemyGetsHit(float damageDone)
-    {
-        base.EnemyGetsHit(damageDone);
-
-        if (health < 2309 / 3)
-        {
-            ChangeState(EnemyStates.Boss_State2);
-        }
-
-        if (health <= 0)
-        {
-            Death(0);
-        }
-    }
 
     protected override void Death(float _destroyTime)
     {
