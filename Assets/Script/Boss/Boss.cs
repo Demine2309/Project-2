@@ -7,11 +7,12 @@ public class Boss : Enemy
 {
     public static Boss Instance;
 
-    [SerializeField] private float distance;
+    private float distance;
 
-    public float runSpeed;
     private bool alive;
     [HideInInspector] public bool facingRight;
+    private bool hasTriggeredBuff = false;
+    private bool hasTriggeredDeath = false;
 
     [Header("Attack Settings:")]
     public Transform sideAttackTransform1; // For Swipe attacking   
@@ -75,17 +76,18 @@ public class Boss : Enemy
 
         distance = Vector2.Distance(DummyController.Instance.transform.position, rb.position);
 
-        //if (health < 2309 / 3)
-        //{
-        //    ChangeState(EnemyStates.Boss_State2);
-        //    anim.SetTrigger("Buff");
-        //}
+        if (!hasTriggeredBuff && health < 2309 / 3)
+        {
+            ChangeState(EnemyStates.Boss_State2);
+            anim.SetTrigger("Buff");
+            hasTriggeredBuff = true;
+        }
 
-        //if (health <= 0)
-        //{
-        //    Death(0);
-        //    anim.SetTrigger("Death");
-        //}
+        if (!hasTriggeredDeath && health <= 0)
+        {
+            Death();
+            hasTriggeredBuff = true;
+        }
     }
 
     protected override void UpdateEnemyStates()
@@ -96,11 +98,11 @@ public class Boss : Enemy
             {
                 case EnemyStates.Boss_State1:
                     attackTimer = 3;
-                    runSpeed = speed;
+                    speed = 2;
                     break;
                 case EnemyStates.Boss_State2:
                     attackTimer = 1;
-                    runSpeed = 3.5f;
+                    speed = 3.5f;
 
                     damageSwipe = 35;
                     damageSpit = 30;
@@ -177,7 +179,7 @@ public class Boss : Enemy
         anim.ResetTrigger("Swipe");
 
         anim.SetTrigger("Swipe");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         anim.ResetTrigger("Swipe");
 
         anim.SetTrigger("Swipe");
@@ -193,7 +195,7 @@ public class Boss : Enemy
         rb.velocity = Vector2.zero;
 
         anim.SetTrigger("Spit");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.2f);
         anim.ResetTrigger("Spit");
 
         anim.SetTrigger("Spit");
@@ -211,7 +213,7 @@ public class Boss : Enemy
         anim.ResetTrigger("JumpShort");
 
         anim.SetTrigger("JumpShort");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         anim.ResetTrigger("JumpShort");
 
         ResetAllAttacks();
@@ -306,11 +308,10 @@ public class Boss : Enemy
     }
     #endregion
 
-    protected override void Death(float _destroyTime)
+    private void Death()
     {
-        ResetAllAttacks();
         alive = false;
-        rb.velocity = new Vector2(rb.velocity.x, -25);
+        rb.velocity = Vector2.zero;
         anim.SetTrigger("Death");
     }
 

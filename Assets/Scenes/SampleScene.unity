@@ -362,9 +362,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2309
   speed: 2
-  damage: 0
-  distance: 0
-  runSpeed: 0
   facingRight: 0
   sideAttackTransform1: {fileID: 72213212}
   sideAttackArea1: {x: 4.37, y: 1.4}
@@ -2238,7 +2235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636430591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.005, y: 0.005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2302,7 +2299,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.5833333, y: 1.9166666}
+    oldSize: {x: 2.5833333, y: 2.6666667}
     newSize: {x: 2.5833333, y: 1.9166666}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

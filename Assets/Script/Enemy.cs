@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] public float health;
     [SerializeField] public float speed;
-    [SerializeField] protected float damage;
+    protected float damage;
 
     protected Rigidbody2D rb;
     protected SpriteRenderer sr;
@@ -49,11 +49,6 @@ public class Enemy : MonoBehaviour
                 ChangeCurrentAnimation();
             }
         }
-    }
-
-    protected virtual void Death(float _destroyTime)
-    {
-        Destroy(gameObject, _destroyTime);
     }
 
     protected virtual void UpdateEnemyStates() { }
