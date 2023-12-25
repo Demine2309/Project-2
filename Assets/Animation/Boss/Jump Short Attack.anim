@@ -93,7 +93,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 2.25
-        value: 5.86
+        value: 5.87
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -269,10 +269,19 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+        time: 2.25
+        value: 0.02
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 2.75
         value: -0.07
-        inSlope: -0.14222223
-        outSlope: -0.14222223
+        inSlope: -0.18
+        outSlope: -0.18
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -709,7 +718,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 2.25
-        value: 5.86
+        value: 5.87
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -885,10 +894,19 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+        time: 2.25
+        value: 0.02
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 2.75
         value: -0.07
-        inSlope: -0.14222223
-        outSlope: -0.14222223
+        inSlope: -0.18
+        outSlope: -0.18
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -1196,6 +1214,13 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 2.25
+    functionName: ShortJumpDamageDummy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 2.375
     functionName: ShortJumpDamageDummy
     data: 

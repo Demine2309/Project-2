@@ -9,10 +9,8 @@ public class Boss : Enemy
 
     private float distance;
 
-    private bool alive;
-    [HideInInspector] public bool facingRight;
+    [HideInInspector] public bool alive;
     private bool hasTriggeredBuff = false;
-    private bool hasTriggeredDeath = false;
 
     [Header("Attack Settings:")]
     public Transform sideAttackTransform1; // For Swipe attacking   
@@ -43,6 +41,8 @@ public class Boss : Enemy
     [SerializeField] private float groundCheckX = 0.5f;
     [SerializeField] private LayerMask whatIsGround;
 
+    [HideInInspector] public float runSpeed;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -69,6 +69,11 @@ public class Boss : Enemy
     {
         base.Update();
 
+        if (health <= 9 && alive)
+        {
+            Death(0);
+        }
+
         if (!attacking)
         {
             attackCountdown -= Time.deltaTime;
@@ -82,12 +87,6 @@ public class Boss : Enemy
             anim.SetTrigger("Buff");
             hasTriggeredBuff = true;
         }
-
-        if (!hasTriggeredDeath && health <= 0)
-        {
-            Death();
-            hasTriggeredBuff = true;
-        }
     }
 
     protected override void UpdateEnemyStates()
@@ -97,12 +96,12 @@ public class Boss : Enemy
             switch (GetCurrentEnemyState)
             {
                 case EnemyStates.Boss_State1:
-                    attackTimer = 3;
-                    speed = 2;
+                    attackTimer = 2.5f;
+                    runSpeed = speed;
                     break;
                 case EnemyStates.Boss_State2:
                     attackTimer = 1;
-                    speed = 3.5f;
+                    runSpeed = 4f;
 
                     damageSwipe = 35;
                     damageSpit = 30;
@@ -158,10 +157,9 @@ public class Boss : Enemy
     IEnumerator ShortJumpAttack()
     {
         attacking = true;
-        rb.velocity = Vector2.zero;
 
         anim.SetTrigger("JumpShort");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         anim.ResetTrigger("JumpShort");
 
         ResetAllAttacks();
@@ -175,7 +173,7 @@ public class Boss : Enemy
         rb.velocity = Vector2.zero;
 
         anim.SetTrigger("Swipe");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         anim.ResetTrigger("Swipe");
 
         anim.SetTrigger("Swipe");
@@ -207,13 +205,12 @@ public class Boss : Enemy
     IEnumerator DoubleShortJumpAttack()
     {
         attacking = true;
-        rb.velocity = Vector2.zero;
 
         anim.SetTrigger("JumpShort");
         anim.ResetTrigger("JumpShort");
 
         anim.SetTrigger("JumpShort");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         anim.ResetTrigger("JumpShort");
 
         ResetAllAttacks();
@@ -227,12 +224,12 @@ public class Boss : Enemy
         {
             float randomValue = Random.value;
 
-            if (randomValue < 0.75f)
+            if (randomValue < 0.7f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
                     ManageTypeOfAttack1();
             }
-            else if (randomValue < 0.9f)
+            else if (randomValue < 0.95f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= jumpAttackRange)
                     StartCoroutine(ShortJumpAttack());
@@ -308,13 +305,6 @@ public class Boss : Enemy
     }
     #endregion
 
-    private void Death()
-    {
-        alive = false;
-        rb.velocity = Vector2.zero;
-        anim.SetTrigger("Death");
-    }
-
     public bool Grounded()
     {
         if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround)
@@ -334,13 +324,24 @@ public class Boss : Enemy
         if (DummyController.Instance.transform.position.x < transform.position.x && transform.localScale.x > 0)
         {
             transform.eulerAngles = new Vector2(transform.eulerAngles.x, 180);
-            facingRight = false;
         }
         else
         {
             transform.eulerAngles = new Vector2(transform.eulerAngles.x, 0);
-            facingRight = true;
         }
+    }
+
+    protected override void Death(float _destroyTime)
+    {
+        ResetAllAttacks();
+        alive = false;
+        rb.velocity = new Vector2(rb.velocity.x, -25);
+        anim.SetTrigger("Death");
+    }
+
+    public void DestroyAfterDeath()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

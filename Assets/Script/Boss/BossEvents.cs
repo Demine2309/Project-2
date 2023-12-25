@@ -40,7 +40,7 @@ public class BossEvents : MonoBehaviour
     {
         Collider2D objectsToHit = Physics2D.OverlapBox(attackTransform.position, attackArea, 0);
 
-        if(objectsToHit.GetComponent<DummyController>() != null)
+        if (objectsToHit.GetComponent<DummyController>() != null)
         {
             objectsToHit.GetComponent<DummyController>().TakeDamage(Boss.Instance.damageSwipe);
         }
@@ -74,5 +74,10 @@ public class BossEvents : MonoBehaviour
         {
             objectsToHit.GetComponent<DummyController>().TakeDamage(Boss.Instance.damageShortJump);
         }
+    }
+
+    void DestroyAfterDeath()
+    {
+        Boss.Instance.DestroyAfterDeath();
     }
 }

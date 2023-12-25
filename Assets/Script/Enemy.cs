@@ -6,9 +6,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] public float speed;
     protected float damage;
 
-    protected Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
     protected SpriteRenderer sr;
-    protected Animator anim;
+    [HideInInspector] public Animator anim;
 
     protected virtual void Start()
     {
@@ -65,6 +65,11 @@ public class Enemy : MonoBehaviour
         {
             Attack();
         }
+    }
+
+    protected virtual void Death(float _destroyTime)
+    {
+        Destroy(gameObject, _destroyTime);
     }
 
     protected virtual void Attack()

@@ -31,13 +31,13 @@ public class Boss_Walk : StateMachineBehaviour
             Boss.Instance.Flip();
 
             Vector2 target = new Vector2(DummyController.Instance.transform.position.x, rb.position.y);
-            Vector2 newPos = Vector2.MoveTowards(rb.position, target, Boss.Instance.speed * Time.fixedDeltaTime);
+            Vector2 newPos = Vector2.MoveTowards(rb.position, target, Boss.Instance.runSpeed * Time.fixedDeltaTime);
 
             rb.MovePosition(newPos);
         }
         else
         {
-            rb.velocity = new Vector2(rb.velocity.x, -25); // if boss is not grounded, fall to ground
+            rb.velocity = new Vector2(rb.velocity.x, -25);
         }
 
         if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= Boss.Instance.attackRange)
