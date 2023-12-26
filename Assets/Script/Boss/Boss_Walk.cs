@@ -26,7 +26,7 @@ public class Boss_Walk : StateMachineBehaviour
 
     private void TargetPlayerPosition(Animator animator)
     {
-        if (Boss.Instance.Grounded())
+        if (Boss.Instance.Grounded() && Boss.Instance.alive == true)
         {
             Boss.Instance.Flip();
 

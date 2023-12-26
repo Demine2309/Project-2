@@ -1,7 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DummyController : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class DummyController : MonoBehaviour
 
     protected float x = 0f;
 
-    public TextMesh popUpText;
+    public TMP_Text popUpText;
 
 
     [SerializeField] private float speed = 20f;
@@ -59,7 +60,9 @@ public class DummyController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         popUpText.text = "-" + damage.ToString();
-        // Popup
-        Instantiate(popupDamagePrefab, transform.position, Quaternion.identity);
+
+        Vector3 headPosition = transform.position + new Vector3(0f, 2f, 0f);
+
+        Instantiate(popupDamagePrefab, headPosition, Quaternion.identity);
     }
 }

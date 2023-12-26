@@ -24,7 +24,7 @@ public class BossEvents : MonoBehaviour
     {
         if (DummyController.Instance.transform.position.x - transform.position.x != 0)
         {
-            HighJumpHit(Boss.Instance.landAttackTransform, Boss.Instance.LandAttackArea);
+            HighJumpHit(Boss.Instance.landAttackTransform, Boss.Instance.landAttackArea);
         }
     }
 
@@ -32,7 +32,7 @@ public class BossEvents : MonoBehaviour
     {
         if (DummyController.Instance.transform.position.x - transform.position.x != 0)
         {
-            ShortJumpHit(Boss.Instance.landAttackTransform, Boss.Instance.LandAttackArea);
+            ShortJumpHit(Boss.Instance.landAttackTransform, Boss.Instance.landAttackArea);
         }
     }
 

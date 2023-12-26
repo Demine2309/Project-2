@@ -7,10 +7,7 @@ public class Boss : Enemy
 {
     public static Boss Instance;
 
-    private float distance;
-
-    [HideInInspector] public bool alive;
-    private bool hasTriggeredBuff = false;
+    [SerializeField] private HealthBar healthBar;
 
     [Header("Attack Settings:")]
     public Transform sideAttackTransform1; // For Swipe attacking   
@@ -20,7 +17,7 @@ public class Boss : Enemy
     public Vector2 sideAttackArea2; // For Spit attacking
 
     public Transform landAttackTransform;
-    public Vector2 LandAttackArea;
+    public Vector2 landAttackArea;
 
     public float attackRange;
     public float jumpAttackRange;
@@ -42,6 +39,10 @@ public class Boss : Enemy
     [SerializeField] private LayerMask whatIsGround;
 
     [HideInInspector] public float runSpeed;
+    private float distance;
+    [HideInInspector] public bool alive;
+    private bool hasTriggeredBuff = false;
+    private float maxHealth = 2309;
 
     private void Awake()
     {
@@ -63,6 +64,8 @@ public class Boss : Enemy
         anim = GetComponentInChildren<Animator>();
         ChangeState(EnemyStates.Boss_State1);
         alive = true;
+
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     protected override void Update()
@@ -99,6 +102,7 @@ public class Boss : Enemy
                     attackTimer = 2.5f;
                     runSpeed = speed;
                     break;
+
                 case EnemyStates.Boss_State2:
                     attackTimer = 1;
                     runSpeed = 4f;
@@ -319,6 +323,13 @@ public class Boss : Enemy
         }
     }
 
+    public void SetHealth(float healthChange)
+    {
+        health -= healthChange;
+
+        healthBar.SetHealth(health);
+    }
+
     public void Flip()
     {
         if (DummyController.Instance.transform.position.x < transform.position.x && transform.localScale.x > 0)
@@ -335,7 +346,7 @@ public class Boss : Enemy
     {
         ResetAllAttacks();
         alive = false;
-        rb.velocity = new Vector2(rb.velocity.x, -25);
+        rb.velocity = Vector2.zero;
         anim.SetTrigger("Death");
     }
 
@@ -350,6 +361,6 @@ public class Boss : Enemy
 
         Gizmos.DrawWireCube(sideAttackTransform1.position, sideAttackArea1);
         Gizmos.DrawWireCube(sideAttackTransform2.position, sideAttackArea2);
-        Gizmos.DrawWireCube(landAttackTransform.position, LandAttackArea);
+        Gizmos.DrawWireCube(landAttackTransform.position, landAttackArea);
     }
 }

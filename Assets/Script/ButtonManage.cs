@@ -8,14 +8,14 @@ public class ButtonManage : MonoBehaviour
 {
     public void ReduceHPClick()
     {
-        Boss.Instance.health -= 100;
+        Boss.Instance.SetHealth(100f);
 
         Debug.Log(Boss.Instance.health);
     }
 
     public void DeathStateClick()
-    {
-        Boss.Instance.health = 1;
+    { 
+        Boss.Instance.SetHealth(Boss.Instance.health - 5);
 
         Debug.Log("Boss is death!");
     }
