@@ -39,10 +39,12 @@ public class Boss : Enemy
     [SerializeField] private LayerMask whatIsGround;
 
     [HideInInspector] public float runSpeed;
-    private float distance;
     [HideInInspector] public bool alive;
+    
     private bool hasTriggeredBuff = false;
     private float maxHealth = 2309;
+
+    private float distance;
 
     private void Awake()
     {
