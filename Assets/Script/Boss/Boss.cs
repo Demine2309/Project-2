@@ -150,7 +150,7 @@ public class Boss : Enemy
         yield return new WaitForSeconds(2f);
 
         anim.SetTrigger("Suspended");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (Grounded() == true)
         {
