@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonManage : MonoBehaviour
 {
@@ -19,4 +19,6 @@ public class ButtonManage : MonoBehaviour
 
         Debug.Log("Boss is death!");
     }
+
+
 }
