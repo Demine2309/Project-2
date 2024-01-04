@@ -20,5 +20,24 @@ public class ButtonManage : MonoBehaviour
         Debug.Log("Boss is death!");
     }
 
+    public void OptionsScene()
+    {
+        SceneManager.LoadScene("Options Menu");
+    }
 
+    public void CreditsScene()
+    {
+        SceneManager.LoadScene("Credits Scene");
+    }
+
+    public void PlayScene()
+    {
+        SceneManager.LoadScene("Play");
+    }
+
+    public void BackClick()
+    {
+
+        SceneManager.LoadScene("Main Menu");
+    }
 }
