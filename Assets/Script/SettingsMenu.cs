@@ -9,5 +9,4 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private AudioMixer myMixer;
     [SerializeField] private Slider musicSlider;
 
-
 }
