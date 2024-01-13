@@ -40,4 +40,9 @@ public class ButtonManage : MonoBehaviour
 
         SceneManager.LoadScene("Main Menu");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit(); 
+    }
 }
