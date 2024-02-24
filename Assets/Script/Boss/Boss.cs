@@ -150,7 +150,7 @@ public class Boss : Enemy
         yield return new WaitForSeconds(2f);
 
         anim.SetTrigger("Suspended");
-        //yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
 
         if (Grounded() == true)
         {
@@ -230,7 +230,7 @@ public class Boss : Enemy
         {
             float randomValue = Random.value;
 
-            if (randomValue < 0.7f)
+            if (randomValue < 0.8f)
             {
                 if (Vector2.Distance(DummyController.Instance.transform.position, rb.position) <= attackRange)
                     ManageTypeOfAttack1();
@@ -300,7 +300,7 @@ public class Boss : Enemy
     {
         float randomValue = Random.value;
 
-        if (randomValue < 0.5f)
+        if (randomValue < 0.4f)
         {
             StartCoroutine(TripleSwipeAttack());
         }
